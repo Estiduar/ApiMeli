@@ -2,33 +2,9 @@
 <html>
 <head>
     <title>Información de Pokémon</title>
-    <style>
-        /* Estilos CSS para los botones de tipo de Pokémon */
-        .tipo-btn {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .tipo-btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <h1>Información de Pokémon</h1>
-
-    <h2>Buscar Pokémon por Tipo:</h2>
-    <div>
-        <a class="tipo-btn" href="/pokemon/tipo/fire">Fuego</a>
-        <a class="tipo-btn" href="/pokemon/tipo/water">Agua</a>
-        <a class="tipo-btn" href="/pokemon/tipo/grass">Planta</a>
-        <!-- Agrega más tipos de Pokémon según sea necesario -->
-    </div>
 
     {% if nombre %}
     <h2>Nombre del Pokémon: {{ nombre }}</h2>
