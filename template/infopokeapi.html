@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Información de Pokémon</title>
+</head>
+<body>
+    <h1>Información de Pokémon</h1>
+
+    <h2>Obtener el tipo de un Pokémon según su nombre:</h2>
+    <form action="/pokemon/tipo" method="GET">
+        <label for="nombre_pokemon">Nombre del Pokémon:</label>
+        <input type="text" id="nombre_pokemon" name="nombre_pokemon" required>
+        <button type="submit">Obtener Tipo</button>
+    </form>
+    <p>Tipo de Pokémon: <span id="tipo_pokemon"></span></p>
+
+    <h2>Obtener un Pokémon al azar de un tipo en específico:</h2>
+    <form action="/pokemon/azar" method="GET">
+        <label for="tipo_pokemon_azar">Tipo de Pokémon:</label>
+        <input type="text" id="tipo_pokemon_azar" name="tipo_pokemon_azar" required>
+        <button type="submit">Obtener Pokémon al Azar</button>
+    </form>
+    <p>Pokémon al Azar: <span id="pokemon_azar"></span></p>
+
+    <h2>Obtener el Pokémon con nombre más largo de cierto tipo:</h2>
+    <form action="/pokemon/maslargo" method="GET">
+        <label for="tipo_pokemon_mas_largo">Tipo de Pokémon:</label>
+        <input type="text" id="tipo_pokemon_mas_largo" name="tipo_pokemon_mas_largo" required>
+        <button type="submit">Obtener Pokémon más Largo</button>
+    </form>
+    <p>Pokémon más Largo: <span id="pokemon_mas_largo"></span></p>
+
+    <!-- Puedes agregar estilos CSS para mejorar la apariencia -->
+
+    <script>
+        // Aquí puedes agregar JavaScript para manejar las respuestas de la API y actualizar los elementos HTML correspondientes
+    </script>
+</body>
+</html>
