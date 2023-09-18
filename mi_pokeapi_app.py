@@ -1,14 +1,8 @@
 from flask import Flask, request, render_template, jsonify
-from routes.auth import routes_auth
-from routes.users_github import users_github
-from dotenv import load_dotenv
 import requests
 import random
 
 app = Flask(__name__, template_folder='template')  # still relative to module
-
-app.register_blueprint(routes_auth, url_prefix="api")
-app.register_blueprint(users_github, url_prefix="api")
 
 # Lista para almacenar los usuarios registrados (solo para fines de demostración)
 usuarios_registrados = []
@@ -78,6 +72,5 @@ def obtener_pokemon_mas_largo(tipo):
         return jsonify({'error': 'No se encontró el tipo de Pokémon'}), 404
 
 if __name__ == "__main__":
-   load_dotenv ()
    app.run(host="localhost", port=5000, debug=True)
 
