@@ -1,6 +1,14 @@
 from flask import Flask, request, render_template, jsonify
+from routes.auth import routes_auth
+from routes.users_github import users_github
+from dotenv import load_dotenv
+import requests
+import random
 
 app = Flask(__name__, template_folder='template')  # still relative to module
+
+app.register_blueprint(routes_auth, url_prefix="api")
+app.register_blueprint(users_github, url_prefix="api")
 
 # Lista para almacenar los usuarios registrados (solo para fines de demostración)
 usuarios_registrados = []
@@ -28,5 +36,47 @@ def registrar_usuario():
 def obtener_usuarios():
     return jsonify(usuarios_registrados)
 
+# Ruta para obtener el tipo de un Pokémon por su nombre (GET)
+@app.route('/pokemon/tipo/<nombre>', methods=['GET'])
+def obtener_tipo_pokemon(nombre):
+    url = f'https://pokeapi.co/api/v2/pokemon/{nombre.lower()}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        tipos = [tipo['type']['name'] for tipo in data['types']]
+        return render_template('infopokeapi.html', nombre=nombre, tipos=tipos)
+    else:
+        return jsonify({'error': 'No se encontró el Pokémon'}), 404
+
+# Ruta para obtener un Pokémon al azar de un tipo en específico (GET)
+@app.route('/pokemon/azar/<tipo>', methods=['GET'])
+def obtener_pokemon_azar(tipo):
+    url = f'https://pokeapi.co/api/v2/type/{tipo.lower()}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        pokemons = data['pokemon']
+        pokemon_azar = random.choice(pokemons)['pokemon']['name']
+        return render_template('infopokeapi.html', pokemon_azar=pokemon_azar)
+    else:
+        return jsonify({'error': 'No se encontró el tipo de Pokémon'}), 404
+
+# Ruta para obtener el Pokémon con el nombre más largo de cierto tipo (GET)
+@app.route('/pokemon/maslargo/<tipo>', methods=['GET'])
+def obtener_pokemon_mas_largo(tipo):
+    url = f'https://pokeapi.co/api/v2/type/{tipo.lower()}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.json()
+        pokemons = data['pokemon']
+        pokemon_mas_largo = max(pokemons, key=lambda x: len(x['pokemon']['name']))['pokemon']['name']
+        return render_template('infopokeapi.html', pokemon_mas_largo=pokemon_mas_largo)
+    else:
+        return jsonify({'error': 'No se encontró el tipo de Pokémon'}), 404
+
 if __name__ == "__main__":
-   app.run(host="localhost",port=5000, debug=True)
+   app.run(host="localhost", port=5000, debug=True)
+
