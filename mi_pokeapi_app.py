@@ -1,11 +1,16 @@
 from flask import Flask, request, render_template, jsonify
 import requests
 import random
+import flask_bcrypt
 
 app = Flask(__name__, template_folder='template')  # still relative to module
 
 # Lista para almacenar los usuarios registrados (solo para fines de demostración)
 usuarios_registrados = []
+
+@app.route('/', methods=['GET'])
+def bienvenida():
+    return "¡Bienvenido a la API de Pokémon!"
 
 # Ruta para la página de registro (GET)
 @app.route('/registro', methods=['GET'])
@@ -72,6 +77,4 @@ def obtener_pokemon_mas_largo(tipo):
         return jsonify({'error': 'No se encontró el tipo de Pokémon'}), 404
 
 if __name__ == "__main__":
-   app.run(host="localhost", port=5000, debug=True)
-
-
+   app.run(host="0.0.0.0", port=5000, debug=True)
