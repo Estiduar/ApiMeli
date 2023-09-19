@@ -4,7 +4,7 @@ import random
 
 app = Flask(__name__, template_folder='template')  # still relative to module
 
-# Lista para almacenar los usuarios registrados (solo para fines de demostración)
+# Listado para almacenar los usuarios registrados
 usuarios_registrados = []
 
 @app.route('/', methods=['GET'])
@@ -23,13 +23,12 @@ def registrar_usuario():
     email = request.form.get('email')
     contrasena = request.form.get('contrasena')
 
-    # Aquí puedes realizar la lógica de registro, como guardar los datos en una base de datos
-    # En este ejemplo, simplemente los agregaremos a la lista de usuarios registrados
+    # En este ejemplo, simplemente agregaremos la informacion a la lista de usuarios registrados
     usuarios_registrados.append({'nombre': nombre, 'email': email, 'contrasena': contrasena})
 
     return jsonify({'mensaje': 'Usuario registrado correctamente'})
 
-# Ruta para obtener todos los usuarios (GET)
+# Ruta para obtener visualizar los usuarios (GET)
 @app.route('/usuarios', methods=['GET'])
 def obtener_usuarios():
     return jsonify(usuarios_registrados)
@@ -77,4 +76,3 @@ def obtener_pokemon_mas_largo(tipo):
 
 if __name__ == "__main__":
    app.run(host="0.0.0.0", port=5000, debug=True)
-
