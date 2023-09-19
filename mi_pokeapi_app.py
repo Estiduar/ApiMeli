@@ -77,4 +77,9 @@ def obtener_pokemon_mas_largo(tipo):
         return jsonify({'error': 'No se encontró el tipo de Pokémon'}), 404
 
 if __name__ == "__main__":
+<<<<<<< HEAD
    app.run(host="0.0.0.0", port=5000, debug=True)
+=======
+   app.run(host="0.0.0.0", port=5000, debug=True)
+
+>>>>>>> 909ac97d0a15e6ebcbcdcc7b41c8bde882036ebf
